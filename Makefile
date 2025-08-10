@@ -21,19 +21,26 @@ all: starting
 clear:
 	clear
 
+su:
+	echo "Please enter vm password :"
+	su -
+
 tor_setup:
 	$(INFO) "$(COLOR_BLUE)Setting up Tor...$(COLOR_RESET)"
 	sudo systemctl enable tor && sudo systemctl start tor
 	sudo mkdir -p /var/lib/tor/$(SERVICE_NAME)
 	sudo chown -R debian-tor:debian-tor /var/lib/tor/$(SERVICE_NAME)
 	sudo chmod 700 /var/lib/tor/$(SERVICE_NAME)
+	sudo cp ./files/torrc /etc/tor/torrc
+	sudo /etc/init.d/tor restart
+	sudo cp ./files/sshd_config /etc/ssh/sshd_config
 	$(SUCCESS) "Tor setup completed."
 
 nginx_setup:
 	$(INFO) "$(COLOR_BLUE)Setting up Nginx...$(COLOR_RESET)"
 	sudo systemctl enable nginx && sudo systemctl start nginx
 	if [ -f ./files/index.html ]; then \
-		sudo cp ./files/index.html /var/www/html/index.html; \
+		sudo cp ./files/index.html /var/www/html/index.html; \ #! MY INDEX.HTML
 		$(SUCCESS) "Nginx setup completed."; \
 	else \
 		$(ERROR) "index.html not found. Skipping Nginx setup."; \
@@ -49,7 +56,7 @@ dep:
 	sudo apt install -y vim nginx tor
 	$(SUCCESS) "Dependencies installed successfully."
 
-starting: clear updating dep tor_setup nginx_setup
+starting: clear su updating dep tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 
