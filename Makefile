@@ -14,7 +14,7 @@ SUCCESS = echo "$(COLOR_GREEN)[SUCCESS]$(COLOR_RESET)"
 ERROR = echo "$(COLOR_RED)[ERROR]$(COLOR_RESET)"
 
 # Targets
-.PHONY: all updating dep starting clean
+.PHONY: all clear tor_setup nginx_setup updating dep starting clean
 
 all: starting
 
@@ -22,28 +22,35 @@ clear:
 	clear
 
 tor_setup:
-	sudo systemctl enable tor && sudo systemctl start tor && echo
+	$(INFO) "$(COLOR_BLUE)Setting up Tor...$(COLOR_RESET)"
+	sudo systemctl enable tor && sudo systemctl start tor
 	sudo mkdir -p /var/lib/tor/$(SERVICE_NAME)
 	sudo chown -R debian-tor:debian-tor /var/lib/tor/$(SERVICE_NAME)
 	sudo chmod 700 /var/lib/tor/$(SERVICE_NAME)
+	$(SUCCESS) "Tor setup completed."
 
 nginx_setup:
-	sudo systemctl enable nginx && sudo systemctl start nginx && echo
-	sudo cp ./index.html /var/www/html/index.html
+	$(INFO) "$(COLOR_BLUE)Setting up Nginx...$(COLOR_RESET)"
+	sudo systemctl enable nginx && sudo systemctl start nginx
+	if [ -f ./index.html ]; then \
+		sudo cp ./index.html /var/www/html/index.html; \
+		$(SUCCESS) "Nginx setup completed."; \
+	else \
+		$(ERROR) "index.html not found. Skipping Nginx setup."; \
+	fi
 
 updating:
 	$(INFO) "$(COLOR_BLUE)Updating system packages...$(COLOR_RESET)"
-	sudo apt-get update && sudo apt-get upgrade -y && \
+	sudo apt-get update && sudo apt-get upgrade -y
 	$(SUCCESS) "System packages updated successfully."
 
 dep:
 	$(INFO) "$(COLOR_BLUE)Installing dependencies...$(COLOR_RESET)"
-	sudo apt install -y vim nginx tor && \
+	sudo apt install -y vim nginx tor
 	$(SUCCESS) "Dependencies installed successfully."
 
 starting: clear updating dep tor_setup nginx_setup
-	$(INFO) "$(COLOR_BLUE)Starting Tor setup...$(COLOR_RESET)"	
-	
+	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 
 clean:
