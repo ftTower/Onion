@@ -29,13 +29,13 @@ tor_setup:
 	sudo systemctl enable tor && sudo systemctl start tor
 	$(INFO) "Creating Tor service directory..."
 	sudo mkdir -p /var/lib/tor/$(SERVICE_NAME)
-	sudo chown -R root:root /var/lib/tor/$(SERVICE_NAME)
+	sudo chown -R debian-tor:debian-tor /var/lib/tor/$(SERVICE_NAME)
 	sudo chmod 700 /var/lib/tor/$(SERVICE_NAME)
 	$(INFO) "Checking for torrc configuration file..."
 	if [ -f ./files/torrc ]; then \
 		$(INFO) "Copying torrc to /etc/tor/torrc..."; \
 		sudo cp ./files/torrc /etc/tor/torrc; \
-		sudo chown root:root /etc/tor/torrc; \
+		sudo chown debian-tor:debian-tor /etc/tor/torrc; \
 		sudo chmod 644 /etc/tor/torrc; \
 	else \
 		$(ERROR) "torrc file not found. Skipping Tor configuration."; \
