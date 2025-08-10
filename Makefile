@@ -1,7 +1,7 @@
 .SILENT:
 
 # Variables
-SERVICE_NAME = hidden_service
+SERVICE_NAME = Oignon
 COLOR_RED = \033[0;31m
 COLOR_GREEN = \033[0;32m
 COLOR_BLUE = \033[0;34m
@@ -76,7 +76,7 @@ deps:
 
 start: clear update deps tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
-	clear && sudo cat /var/lib/tor/$(SERVICE_NAME)/hostname
+	clear && sudo cat /var/lib/tor/Oignon/hostname
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 
 clean:
