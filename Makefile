@@ -35,6 +35,8 @@ tor_setup:
 	if [ -f ./files/torrc ]; then \
 		$(INFO) "Copying torrc to /etc/tor/torrc..."; \
 		sudo cp ./files/torrc /etc/tor/torrc; \
+		sudo chown root:root /etc/tor/torrc; \
+		sudo chmod 644 /etc/tor/torrc; \
 	else \
 		$(ERROR) "torrc file not found. Skipping Tor configuration."; \
 	fi
@@ -42,6 +44,7 @@ tor_setup:
 	if [ -f ./files/sshd_config ]; then \
 		$(INFO) "Copying sshd_config to /etc/ssh/sshd_config..."; \
 		sudo cp ./files/sshd_config /etc/ssh/sshd_config; \
+		sudo chmod 644 /etc/ssh/sshd_config; \
 	else \
 		$(ERROR) "sshd_config file not found. Skipping SSH configuration."; \
 	fi
@@ -76,7 +79,6 @@ deps:
 
 start: clear update deps tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
-	sudo systemctl restart tor
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 	sudo cat /var/lib/tor/Oignon/hostname
 
