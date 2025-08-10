@@ -50,6 +50,7 @@ tor_setup:
 	fi
 	$(INFO) "Restarting Tor service..."
 	sudo systemctl restart tor
+	tor
 	$(SUCCESS) "Tor setup completed."
 
 nginx_setup:
