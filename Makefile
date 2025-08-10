@@ -18,14 +18,17 @@ ERROR = echo "$(COLOR_RED)[ERROR]$(COLOR_RESET)"
 
 all: starting
 
+clear:
+	clear
+
 tor_setup:
-	sudo systemctl enable tor && sudo systemctl start tor && sudo systemctl status tor && echo
+	sudo systemctl enable tor && sudo systemctl start tor && echo
 	sudo mkdir -p /var/lib/tor/$(SERVICE_NAME)
 	sudo chown -R debian-tor:debian-tor /var/lib/tor/$(SERVICE_NAME)
 	sudo chmod 700 /var/lib/tor/$(SERVICE_NAME)
 
 nginx_setup:
-	sudo systemctl enable nginx && sudo systemctl start nginx && sudo systemctl status nginx && echo
+	sudo systemctl enable nginx && sudo systemctl start nginx && echo
 	sudo cp ./index.html /var/www/html/index.html
 
 updating:
@@ -38,7 +41,7 @@ dep:
 	sudo apt install -y vim nginx tor && \
 	$(SUCCESS) "Dependencies installed successfully."
 
-starting: updating dep tor_setup nginx_setup
+starting: clear updating dep tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting Tor setup...$(COLOR_RESET)"	
 	
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
