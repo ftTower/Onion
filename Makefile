@@ -32,8 +32,8 @@ tor_setup:
 nginx_setup:
 	$(INFO) "$(COLOR_BLUE)Setting up Nginx...$(COLOR_RESET)"
 	sudo systemctl enable nginx && sudo systemctl start nginx
-	if [ -f ./index.html ]; then \
-		sudo cp /var/www/html/index.html ./files/index.html; \
+	if [ -f ./files/index.html ]; then \
+		sudo cp ./files/index.html /var/www/html/index.html; \
 		$(SUCCESS) "Nginx setup completed."; \
 	else \
 		$(ERROR) "index.html not found. Skipping Nginx setup."; \
