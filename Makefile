@@ -76,6 +76,7 @@ deps:
 
 start: clear update deps tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
+	sudo systemctl restart tor
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 	sudo cat /var/lib/tor/Oignon/hostname
 
