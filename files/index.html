@@ -4,49 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bienvenue sur notre site .onion sécurisé.">
-    <title>Site .onion</title>
+    <title>Mon site Oignon</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #000000;
+            color: #00ff00;
             margin: 0;
             padding: 0;
             text-align: center;
+            background-image: url('https://media.giphy.com/media/3o6ZsYm5P38NvUWrDi/giphy.gif');
+            background-size: cover;
+            background-attachment: fixed;
         }
         header {
-            background-color: #1e1e1e;
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
         }
         main {
             padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            margin: 20px;
+            border-radius: 10px;
         }
         footer {
-            background-color: #1e1e1e;
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-        a {
-            color: #4caf50;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bienvenue sur notre site .onion</h1>
+        <h1>Bienvenue sur notre site .onion d'études</h1>
+        <nav>
+            <a href="#home">Accueil</a>
+            <a href="#about">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
     <main>
-        <p>Ce site est accessible uniquement via le réseau Tor.</p>
+        <p>Ce site est dédié aux études et est accessible uniquement via le réseau Tor.</p>
         <p>Pour en savoir plus, visitez <a href="https://www.torproject.org/" target="_blank">le site officiel de Tor</a>.</p>
     </main>
     <footer>
-        <p>&copy; 2023 Site .onion - Tous droits réservés.</p>
+        <p>&copy; 2023 Site .onion d'études - Tous droits réservés.</p>
     </footer>
 </body>
 </html>
