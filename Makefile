@@ -49,7 +49,7 @@ tor_setup:
 		$(ERROR) "sshd_config file not found. Skipping SSH configuration."; \
 	fi
 	$(INFO) "Restarting Tor service..."
-	sudo systemctl restart tor
+	sudo systemctl restart tor && sleep 5
 	$(SUCCESS) "Tor setup completed."
 
 nginx_setup:
