@@ -19,31 +19,43 @@ ERROR = echo "$(COLOR_RED)[ERROR]$(COLOR_RESET)"
 all: start
 
 clear:
+	$(INFO) "Clearing the terminal..."
 	clear
+	$(SUCCESS) "Terminal cleared."
 
 tor_setup:
-	$(INFO) "$(COLOR_BLUE)Setting up Tor...$(COLOR_RESET)"
+	$(INFO) "$(COLOR_BLUE)Starting Tor setup...$(COLOR_RESET)"
+	$(INFO) "Enabling and starting Tor service..."
 	sudo systemctl enable tor && sudo systemctl start tor
+	$(INFO) "Creating Tor service directory..."
 	sudo mkdir -p /var/lib/tor/$(SERVICE_NAME)
 	sudo chown -R debian-tor:debian-tor /var/lib/tor/$(SERVICE_NAME)
 	sudo chmod 700 /var/lib/tor/$(SERVICE_NAME)
+	$(INFO) "Checking for torrc configuration file..."
 	if [ -f ./files/torrc ]; then \
+		$(INFO) "Copying torrc to /etc/tor/torrc..."; \
 		sudo cp ./files/torrc /etc/tor/torrc; \
 	else \
 		$(ERROR) "torrc file not found. Skipping Tor configuration."; \
 	fi
+	$(INFO) "Checking for sshd_config file..."
 	if [ -f ./files/sshd_config ]; then \
+		$(INFO) "Copying sshd_config to /etc/ssh/sshd_config..."; \
 		sudo cp ./files/sshd_config /etc/ssh/sshd_config; \
 	else \
 		$(ERROR) "sshd_config file not found. Skipping SSH configuration."; \
 	fi
+	$(INFO) "Restarting Tor service..."
 	sudo systemctl restart tor
 	$(SUCCESS) "Tor setup completed."
 
 nginx_setup:
-	$(INFO) "$(COLOR_BLUE)Setting up Nginx...$(COLOR_RESET)"
+	$(INFO) "$(COLOR_BLUE)Starting Nginx setup...$(COLOR_RESET)"
+	$(INFO) "Enabling and starting Nginx service..."
 	sudo systemctl enable nginx && sudo systemctl start nginx
+	$(INFO) "Checking for index.html file..."
 	if [ -f ./files/index.html ]; then \
+		$(INFO) "Copying index.html to /var/www/html/index.html..."; \
 		sudo cp ./files/index.html /var/www/html/index.html; \
 		$(SUCCESS) "Nginx setup completed."; \
 	else \
@@ -52,11 +64,13 @@ nginx_setup:
 
 update:
 	$(INFO) "$(COLOR_BLUE)Updating system packages...$(COLOR_RESET)"
+	$(INFO) "Running apt-get update and upgrade..."
 	sudo apt-get update && sudo apt-get upgrade -y
 	$(SUCCESS) "System packages updated successfully."
 
 deps:
 	$(INFO) "$(COLOR_BLUE)Installing dependencies...$(COLOR_RESET)"
+	$(INFO) "Installing vim, nginx, and tor..."
 	sudo apt install -y vim nginx tor
 	$(SUCCESS) "Dependencies installed successfully."
 
@@ -66,5 +80,6 @@ start: clear update deps tor_setup nginx_setup
 
 clean:
 	$(INFO) "$(COLOR_BLUE)Cleaning up...$(COLOR_RESET)"
+	$(INFO) "Performing cleanup tasks..."
 	# Add cleanup commands here if needed
 	$(SUCCESS) "Cleanup completed."
