@@ -29,7 +29,7 @@ tor_setup:
 	sudo systemctl enable tor && sudo systemctl start tor
 	$(INFO) "Creating Tor service directory..."
 	sudo mkdir -p /var/lib/tor/$(SERVICE_NAME)
-	sudo chown -R debian-tor:debian-tor /var/lib/tor/$(SERVICE_NAME)
+	sudo chown -R root:root /var/lib/tor/$(SERVICE_NAME)
 	sudo chmod 700 /var/lib/tor/$(SERVICE_NAME)
 	$(INFO) "Checking for torrc configuration file..."
 	if [ -f ./files/torrc ]; then \
