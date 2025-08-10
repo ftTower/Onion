@@ -76,7 +76,7 @@ deps:
 
 start: clear update deps tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
-	clear && sudo cat /var/lib/tor/$service_name/hostname
+	clear && sudo cat /var/lib/tor/$(SERVICE_NAME)/hostname
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 
 clean:
