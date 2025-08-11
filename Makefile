@@ -73,11 +73,31 @@ update:
 
 deps:
 	$(INFO) "$(COLOR_BLUE)Installing dependencies...$(COLOR_RESET)"
-	$(INFO) "Installing vim, nginx, and tor..."
-	sudo apt install -y vim nginx tor
+	$(INFO) "Installing vim, wget, curl, torsocks, nginx, and tor..."
+	sudo apt install -y vim nginx tor wget curl torsocks
 	$(SUCCESS) "Dependencies installed successfully."
 
 start: clear update deps tor_setup nginx_setup
 	$(INFO) "$(COLOR_BLUE)Starting $(SERVICE_NAME) setup...$(COLOR_RESET)"
 	$(SUCCESS) "$(SERVICE_NAME) setup completed successfully."
 	sudo cat /var/lib/tor/Oignon/hostname
+
+
+#! =============================================CLIENT PART
+
+
+init:
+	sudo systemctl start tor
+	cp ./files/tor.service /usr/lib/systemd/system/tor.service
+	sudo systemctl daemon-reload
+	sudo systemctl start tor
+	sudo systemctl status tor
+
+dl-browser:
+	exit
+	wget https://www.torproject.org/dist/torbrowser/14.5.5/tor-browser-linux-x86_64-14.5.5.tar.xz 
+	tar -xf tor-browser-linux-x86_64-14.5.5.tar.xz
+	cd tor-browser && ./start-tor-browser.desktop 
+
+client: update deps dl-browser init
+	

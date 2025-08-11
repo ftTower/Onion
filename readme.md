@@ -19,13 +19,18 @@ apt-get install git -y && git clone https://github.com/ftTower/Onion.git Onion &
 
 ## Client testing
 
+### seeing website on onion browser
+
 ```bash
 su -
 ```
 
+```bash
+apt-get install git -y && git clone https://github.com/ftTower/Onion.git Onion && cd Onion && make client
+```
+
+### ssh entry
 
 ```bash
-sudo apt-get update && sudo apt-get upgrade && sudo apt install wget curl -y
-wget https://www.torproject.org/dist/torbrowser/14.5.5/tor-browser-linux-x86_64-14.5.5.tar.xz
-
+torsocks ssh user@address.onion
 ```

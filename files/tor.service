@@ -1,0 +1,15 @@
+# This service is actually a systemd target,
+# but we are using a service since targets cannot be reloaded.
+
+[Unit]
+Description=Anonymizing overlay network for TCP (multi-instance-master)
+
+[Service]
+ExecStart=/usr/bin/tor -f /etc/tor/torrc
+ExecReload=/usr/bin/killall -HUP tor
+Type=simple
+User=debian-tor
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
