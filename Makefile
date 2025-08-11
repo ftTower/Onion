@@ -94,7 +94,7 @@ init:
 	sudo systemctl status tor
 
 dl-browser:
-	exit
+	sudo -k
 	wget https://www.torproject.org/dist/torbrowser/14.5.5/tor-browser-linux-x86_64-14.5.5.tar.xz 
 	tar -xf tor-browser-linux-x86_64-14.5.5.tar.xz
 	cd tor-browser && ./start-tor-browser.desktop 
