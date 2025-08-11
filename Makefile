@@ -85,7 +85,6 @@ start: clear update deps tor_setup nginx_setup
 
 #! =============================================CLIENT PART
 
-
 init:
 	sudo systemctl start tor
 	cp ./files/tor.service /usr/lib/systemd/system/tor.service
@@ -94,10 +93,9 @@ init:
 	sudo systemctl status tor
 
 dl-browser:
-	sudo -k
 	wget https://www.torproject.org/dist/torbrowser/14.5.5/tor-browser-linux-x86_64-14.5.5.tar.xz 
 	tar -xf tor-browser-linux-x86_64-14.5.5.tar.xz
 	cd tor-browser && ./start-tor-browser.desktop 
 
-client: update deps dl-browser init
+client: update deps
 	

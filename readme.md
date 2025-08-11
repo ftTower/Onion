@@ -11,6 +11,7 @@ add additional gest to have shared clipboard
 
 ```bash
 su -
+usermod -aG sudo <your username>
 ```
 
 ```bash
@@ -23,6 +24,7 @@ apt-get install git -y && git clone https://github.com/ftTower/Onion.git Onion &
 
 ```bash
 su -
+usermod -aG sudo <your username>
 ```
 
 ```bash
