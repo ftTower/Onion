@@ -97,5 +97,5 @@ dl-browser:
 	tar -xf tor-browser-linux-x86_64-14.5.5.tar.xz
 	cd tor-browser && ./start-tor-browser.desktop 
 
-client: update deps
+client: update deps init dl-browser
 	
