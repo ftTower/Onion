@@ -2,6 +2,8 @@
 
 A web server configured to run on the Tor network, allowing you to host web and SSH services accessible via `.onion` addresses.
 
+![Banner](https://github.com/ftTower/ftTower/blob/main/assets/Oignon/oignon.png)
+
 ## 📋 Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -62,12 +64,13 @@ The `make start` script automatically performs:
 
 ### Retrieving Your .onion Address
 
-![Ouput](https://github.com/ftTower/ftTower/blob/main/assets/Oignon/server-output.png)
 At the end of the installation, your `.onion` address will be displayed. You can also retrieve it at any time:
 
 ```bash
 sudo cat /var/lib/tor/Oignon/hostname
 ```
+
+![Ouput](https://github.com/ftTower/ftTower/blob/main/assets/Oignon/server-output.png)
 
 ## 💻 Client Installation
 
