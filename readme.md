@@ -62,6 +62,7 @@ The `make start` script automatically performs:
 
 ### Retrieving Your .onion Address
 
+![Ouput](https://github.com/ftTower/ftTower/blob/main/assets/Oignon/server-output.png)
 At the end of the installation, your `.onion` address will be displayed. You can also retrieve it at any time:
 
 ```bash
@@ -93,6 +94,8 @@ make client
 1. Install the Tor client (see above)
 2. Launch Tor Browser
 3. Enter your server's `.onion` address in the address bar
+
+![tor](https://github.com/ftTower/ftTower/blob/main/assets/Oignon/oignon-site.png)
 
 ### SSH Connection via Tor
 
